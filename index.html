@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BlueSky College</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d47a1;
+            --secondary: #1565c0;
+            --highlight: #42a5f5;
+            --text-light: #ffffff;
+            --bg-light: #ffffff;
+            --accent-dark: #0b3d91;
+            --accent-light: #e3f2fd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+        }
+
+        .header-container {
+            max-width: 1300px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            z-index: 99;
+            /* background-color: rgba(13, 71, 161, 0.3); */
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .nav-links ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links ul li a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links ul li a:hover {
+            color: var(--highlight);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            /* opacity: 0; */
+            top: 100%;
+            left: 0;
+            display: none;
+            /* background-color: rgba(255, 255, 255, 0.95); */
+            padding: 10px 0;
+            list-style: none;
+            border-radius: 6px;
+            display: none !important;
+            min-width: 220px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block !important;
+            opacity: 1;
+        }
+
+        .dropdown-menu li a {
+            display: block;
+            padding: 10px 20px;
+            color: var(--primary);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: var(--accent-light);
+        }
+
+        .btn-enroll {
+            background-color: var(--highlight);
+            color: var(--text-light);
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-enroll:hover {
+            background-color: var(--text-light);
+            color: var(--highlight);
+            border: 1px solid var(--highlight);
+        }
+
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: url('https://content3.jdmagicbox.com/comp/indore/g7/0731px731.x731.230111211714.m4g7/catalogue/annie-besant-college-indore-colleges-sh9ghba951.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            color: var(--text-light);
+            overflow: hidden;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10%;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .hero-quote {
+            max-width: 500px;
+            color: var(--text-light);
+            background-color: rgba(13, 71, 161, 0.25);
+            /* var(--primary) with opacity */
+            padding: 30px;
+            border-radius: 12px;
+            z-index: 2;
+            position: relative;
+            font-size: 1rem;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-quote .quote-author {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--highlight);
+        }
+
+        .hero-quote img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--highlight);
+        }
+
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            animation: fadeIn 1.2s ease-out forwards;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 span {
+            color: var(--highlight);
+        }
+
+        .hero-content h3 {
+            font-size: 1.4rem;
+            color: var(--accent-light);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+        }
+
+        .features {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 2rem;
+        }
+
+        .features li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .features li::before {
+            content: \"✔\";
+            position: absolute;
+            left: 0;
+            color: var(--highlight);
+        }
+
+        .btn-group button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            margin-right: 1rem;
+        }
+
+        .btn-explore {
+            background-color: var(--highlight);
+            color: var(--text-light);
+        }
+
+        .btn-explore:hover {
+            background-color: var(--text-light);
+            color: var(--highlight);
+        }
+
+        .btn-contact {
+            background-color: var(--text-light);
+            color: var(--highlight);
+        }
+
+        .btn-contact:hover {
+            background-color: var(--highlight);
+            color: var(--text-light);
+        }
+
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .circle-top {
+            width: 400px;
+            height: 400px;
+            background-color: var(--highlight);
+            top: -100px;
+            left: -100px;
+        }
+
+        .circle-bottom {
+            width: 300px;
+            height: 300px;
+            background-color: var(--secondary);
+            bottom: 50px;
+            right: 50px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .enroll-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 71, 161, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    padding: 20px;
+}
+
+.enroll-modal-overlay.show {
+    display: flex;
+}
+
+.enroll-modal {
+    background: var(--bg-light);
+    padding: 40px 30px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: fadeInUp 0.4s ease-out;
+}
+
+.enroll-modal h2 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.enroll-modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.enroll-modal input,
+.enroll-modal select,
+.enroll-modal textarea {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    outline: none;
+}
+
+.enroll-modal input:focus,
+.enroll-modal select:focus,
+.enroll-modal textarea:focus {
+    border-color: var(--highlight);
+}
+
+.btn-submit {
+    background-color: var(--highlight);
+    color: var(--text-light);
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: var(--primary);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--primary);
+    cursor: pointer;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJVbVREvqotXuMhvrD4t_471jPGw3gNLldYA&s"
+                    alt="Logo">
+                <span>Annie Besant College</span>
+            </div>
+            <nav class="nav-links">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#">About Us ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Overview</a></li>
+                            <li><a href="#">Our Inspiration</a></li>
+                            <li><a href="#">Director's Message</a></li>
+                            <li><a href="#">Principal's Message</a></li>
+                            <li><a href="#">Mission & Vision</a></li>
+                            <li><a href="#">Our Affiliation</a></li>
+                            <li><a href="#"> Infrastructure & Facilities</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Courses ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Courses</a></li>
+                            <li><a href="#">Fees Structure</a></li>
+                            <li><a href="#">Scholarships</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <button class="btn-enroll">Enroll Now</button>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h3>Empowering Minds. Shaping Futures.</h3>
+            <h1>Welcome to <span>Annie Besant College</span></h1>
+            <p>Experience excellence in education with globally recognized programs, expert faculty, and a future-ready
+                campus environment.</p>
+            <ul class="features">
+                <li>World-Class Curriculum</li>
+                <li>Experienced Faculty</li>
+                <li>Modern Infrastructure</li>
+                <li>Scholarships & Placements</li>
+            </ul>
+            <div class="btn-group">
+                <button class="btn-explore">Explore Courses</button>
+                <button class="btn-contact">Contact Us</button>
+            </div>
+        </div>
+
+        <!-- 🌟 Quote Section -->
+        <div class="hero-quote">
+            <p>
+                "Not out of right practice comes right thinking, but out of right thinking comes right practice.
+                It matters enormously what you think. If you think falsely, you will act mistakenly, if you think
+                basely,
+                your conduct will suit your thinking."
+            </p>
+            <div class="quote-author">
+                <strong>Dr. Annie Besant</strong>
+                <img src="https://anniebesant.co.in/college/images/imganniebesent.jpg" alt="Annie Besant">
+            </div>
+        </div>
+
+        <div class="decorative-circle circle-top"></div>
+        <div class="decorative-circle circle-bottom"></div>
+        <!-- Enroll Modal -->
+<div class="enroll-modal-overlay" id="enrollModal">
+    <div class="enroll-modal">
+        <h2>Enroll at Annie Besant College</h2>
+        <form>
+            <input type="text" placeholder="Full Name" required />
+            <input type="email" placeholder="Email Address" required />
+            <input type="tel" placeholder="Phone Number" required />
+            <select required>
+                <option value="">Select Course</option>
+                <option>B.Sc</option>
+                <option>B.Com</option>
+                <option>B.A</option>
+                <option>BBA</option>
+            </select>
+            <textarea rows="3" placeholder="Message (optional)"></textarea>
+            <button type="submit" class="btn-submit">Submit Application</button>
+        </form>
+        <button class="close-modal" onclick="toggleEnrollModal()">×</button>
+    </div>
+</div>
+
+    </section>
+        <script>
+    const toggleEnrollModal = () => {
+        document.getElementById('enrollModal').classList.toggle('show');
+    }
+
+    document.querySelector('.btn-enroll').addEventListener('click', toggleEnrollModal);
+
+    </script>
+</body>
+
+</html>
